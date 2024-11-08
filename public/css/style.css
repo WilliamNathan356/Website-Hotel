@@ -263,3 +263,13 @@
     padding-right: 0;
     border-right: none;
 }
+
+/* Extra Css */
+#registerQ a{
+    font-size: small;
+}
+
+#loginQ a{
+    font-size: small;
+    text-align: right;
+}
