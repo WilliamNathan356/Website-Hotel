@@ -18,6 +18,6 @@ app.listen(PORT, (err) => {
 
 app.use(express.static('public'))
 
-// COMMENTED TO TEST FUNCTIONALITY 11/10/
+// COMMENTED TO TEST FUNCTIONALITY 11/10/2024
 // app.post("/register", (request, response));
 // app.post("/login", (request, response));
