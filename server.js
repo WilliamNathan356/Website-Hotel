@@ -18,6 +18,15 @@ app.listen(PORT, (err) => {
 
 app.use(express.static('public'))
 
+app.get("/status", (req, res) => {
+    const status = {
+        "Status": "Running"
+    };
+    
+    res.send(status);
+});
+
 // COMMENTED TO TEST FUNCTIONALITY 11/10/2024
-// app.post("/register", (request, response));
-// app.post("/login", (request, response));
+// app.post("/register", (req, res));
+// app.post("/login", (req, res));
+// app.get("/user" (req, res));
