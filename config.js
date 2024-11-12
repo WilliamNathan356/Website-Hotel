@@ -3,5 +3,7 @@ module.exports = {
     ROLES: {
         USER: 'user',
         ADMIN: 'admin'
-    }
+    },
+    jwtSecret: '!t1e1st!',
+    jwtExpiration: 60 * 60,
 }
