@@ -24,12 +24,23 @@ module.exports = {
     initialise: (sequelize) => {
         this.model = sequelize.define("room", roomModel);
     },
-    createRoom: (room) => {
-        return this.model.create(room);
+    async createRoom(room) {
+        try {
+            return await this.model.create(room);
+        } catch (error) {
+            console.error('Error creating room:', error);
+            throw error;
+        }
     },
-    findRoom: (query) => {
-        return this.model.findOne({
-            where: query,
-        });
+
+    async findRoom(query) {
+        try {
+            return await this.model.findOne({
+                where: query,
+            });
+        } catch (error) {
+            console.error('Error finding room:', error);
+            throw error;
+        }
     },
 };

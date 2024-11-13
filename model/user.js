@@ -37,13 +37,23 @@ module.exports = {
         this.model = sequelize.define("user", userModel);
     },
 
-    createUser: (user) => {
-        return this.model.create(user);
+    async createUser(user) {
+        try {
+            return await this.model.create(user);
+        } catch (error) {
+            console.error('Error creating user:', error);
+            throw error;
+        }
     },
 
-    findUser: (query) => {
-        return this.model.findOne({
-            where: query, 
-        });
+    async findUser(query) {
+        try {
+            return await this.model.findOne({
+                where: query,
+            });
+        } catch (error) {
+            console.error('Error finding user:', error);
+            throw error;
+        }
     }
 };
