@@ -36,44 +36,48 @@
             </div>
             
         </div>
-        <form class="row g-4 m-4 mt-0 p-4 pt-1 needs-validation text-light" novalidate>
+        <form method="post" action="/api/register" class="row g-4 m-4 mt-0 p-4 pt-1 needs-validation text-light" novalidate>
             <div class="col-md-6">
-                <label for="validationCustom01" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="validationCustom01" placeholder="Joghn" required>
+                <label for="userFName" class="form-label">First Name</label>
+                <input name="firstName" type="text" class="form-control" id="userFName" placeholder="Joghn" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
             <div class="col-md-6">
-                <label for="validationCustom01" class="form-label">Last Name</label>    
-                <input type="text" class="form-control" id="validationCustom01" placeholder="Smith" required>
+                <label for="userLName" class="form-label">Last Name</label>    
+                <input name="lastName" type="text" class="form-control" id="userLName" placeholder="Smith" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
             <div class="col-md-12">
-                <label for="validationCustom02" class="form-label">Email</label>
-                <input type="email" class="form-control" id="validationCustom02" placeholder="joghn@example.com" required>
+                <label for="userEmail" class="form-label">Email</label>
+                <input name="email" type="email" class="form-control" id="userEmail" placeholder="joghn@example.com" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>  
             <div class="col-12">
-                <label for="validationCustom02" class="form-label">Password</label>
-                <input type="password" class="form-control" id="validationCustom02" required>
+                <label for="userPass" class="form-label">Password</label>
+                <input name="password" type="password" class="form-control" id="userPass" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>  
             <div class="col-md-12">
-                <label for="validationCustom02" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="validationCustom02" required>
+                <label for="userConfPass" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="userConfPass" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>  
             <div class="col">
                 <button class="btn btn-primary" type="submit">Register</button>
+                <!-- <button class="btn btn-primary w-25" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span class="visually-hidden" role="status">Loading...</span>
+                </button> -->
             </div>
             <div class="col-md-4 mt-4 text-end" id="loginQ">
                 <a href="login.html">Have an account? (Login Here)</a>
@@ -88,22 +92,29 @@
 
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (() => {
-          'use strict'
-        
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          const forms = document.querySelectorAll('.needs-validation')
-        
-          // Loop over them and prevent submission
-          Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-              if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-              }
-        
-              form.classList.add('was-validated')
-            }, false)
-          })
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+            const userPass = document.getElementById('userPass').value;
+            const userConfPass = document.getElementById('userConfPass').value;
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity() ) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    } else if (userPass != userConfPass) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        
+                    }
+
+                    setTimeout(100)
+                    form.classList.add('was-validated')
+                }, false)
+            })
         })()
     </script>
 </body>
