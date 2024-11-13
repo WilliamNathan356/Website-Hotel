@@ -17,13 +17,12 @@ const generateAccessToken = (email, id) => {
 };
 
 module.exports = {
-    register: (req,res) => {
-        const payload = req.body;
-        
-        userModel.createUser(
-            Object.assign(payload)
-        )
-        .then((user) => {
+    async register(req, res) {
+        try {
+            const payload = req.body;
+            const user = await userModel.createUser(
+                Object.assign(payload)
+            );
             const accessToken = generateAccessToken(payload.email, user.id);
 
             return res.status(200).json({
@@ -33,38 +32,28 @@ module.exports = {
                     token: accessToken,
                 },
             });
-        })
-        .catch((err) => {
+        } catch (err) {
             return res.status(500).json({
                 status: false,
                 error: err,
             });
-        });
+        }
     },
-    login: (req, res) => {
-        const { email, password } = req.body;
+    async login(req, res) {
+        try {
+            const { email, password } = req.body;
+            const user = await userModel.findUser({ email });
 
-        userModel.findUser({ email })
-        .then((user) => {
-            if (!user){
+            if (!user || !user.password) {
                 return res.status(400).json({
                     status: false,
                     error: {
                         message: "Email/Password is incorrect!"
                     }
-                })
+                });
             }
 
-            if (!user.password){
-                return res.status(400).json({
-                    status: false,
-                    error: {
-                        message: "Email/Password is incorrect!"
-                    }
-                })
-            }
-
-            const accessToken = generateAccessToken(user.email, user.id)
+            const accessToken = generateAccessToken(user.email, user.id);
 
             return res.status(200).json({
                 status: true,
@@ -72,13 +61,13 @@ module.exports = {
                     user: user.toJSON(),
                     token: accessToken,
                 }
-            })
-        })
-        .catch((err) =>{
+            });
+        } catch (err) {
             return res.status(500).json({
                 status: false,
                 error: err,
-            })
-        });
+            });
+        }
     }
+
 }
