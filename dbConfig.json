@@ -1,0 +1,12 @@
+{
+    "development": {
+        "username": "t_dev",
+        "password": "t_dev",
+        "database": "t_db_dev"
+    },
+    "production": {
+        "username": "t_prod",
+        "password": "t_prod",
+        "database": "taiwanin_db"
+    }    
+}
