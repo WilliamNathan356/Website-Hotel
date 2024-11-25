@@ -18,48 +18,52 @@ const generateAccessToken = (email, id) => {
 
 module.exports = {
     async register(req, res) {
-        const payload = req.body;
-        const valUser = await userModel.findUser(payload.email);
-        if (valUser){
-            const response = {
-                status: 'Failed! User exists',
+        try {
+            const payload = req.body;
+            const valUser = await userModel.findUser(payload.email);
+            if (valUser){
+                const response = {
+                    status: 'Failed! User exists',
+                }
+                res.status(400).send(response);
+            } else {
+                const user = await userModel.createUser(payload);
+                const accessToken = generateAccessToken(payload.email, user.id);
+                const response = {
+                    token: accessToken,
+                    redirectTo: '/'
+                }
+                res.status(200).send(response);
             }
-            res.status(400).send(response);
-        } else {
-            const user = await userModel.createUser(payload);
-            const accessToken = generateAccessToken(payload.email, user.id);
-            const response = {
-                token: accessToken,
-                redirectTo: '/'
-            }
-            res.status(200).send(response);
+        } catch (error) {
+            res.status(500).json({
+                status: false,
+                error: err,
+            });
         }
-        
     },
     async login(req, res) {
         try {
             const { email, password } = req.body;
             const user = await userModel.findUser({ email });
 
-            if (!user || !user.password) {
-                res.status(400).json({
+            if (!user || !user.password || password != user.password) {
+                const response = {
                     status: false,
                     error: {
                         message: "Email/Password is incorrect!"
                     }
-                });
-            }
-
-            const accessToken = generateAccessToken(user.email, user.id);
-
-            res.status(200).json({
-                status: true,
-                data: {
-                    user: user.toJSON(),
-                    token: accessToken,
-                    redirectUrl: '../index.html',
                 }
-            });
+                res.status(400).send(response);
+            } else {
+                const accessToken = generateAccessToken(user.email, user.userID);
+                const response = {
+                    user: user.firstName,
+                    token: accessToken,
+                    redirectUrl: '/',   
+                }
+                res.status(200).send(response);
+            }
         } catch (err) {
             res.status(500).json({
                 status: false,
