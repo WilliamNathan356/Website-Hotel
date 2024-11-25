@@ -1,6 +1,7 @@
 // Modules/Library Import
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 const Sequelize = require('sequelize')
 
@@ -12,9 +13,12 @@ const roomModel = require('./model/room');
 const { PORT } = require('./config');
 
 // Import Routes
-const allRoutes = require('./routes')
+const allRoutes = require('./routes');
 
 app.use(express.json());
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Get Running Environment
 const env = process.env.NODE_ENV || "development";
@@ -32,7 +36,7 @@ roomModel.initialise(sequelize);
 // Syncing the models that are defined on sequelize with the tables that alredy exists
 // in the database. It creates models as tables that do not exist in the DB.
 sequelize
-    .sync()
+    .sync({ force: true })
     .then(() => {
         console.log("Sequelize Initialised!!");
 
