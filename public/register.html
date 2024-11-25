@@ -36,7 +36,7 @@
             </div>
             
         </div>
-        <form method="post" action="/api/register" class="row g-4 m-4 mt-0 p-4 pt-1 needs-validation text-light" novalidate>
+        <form class="row g-4 m-4 mt-0 p-4 pt-1 needs-validation text-light" id="registerForm" novalidate>
             <div class="col-md-6">
                 <label for="userFName" class="form-label">First Name</label>
                 <input name="firstName" type="text" class="form-control" id="userFName" placeholder="Joghn" required>
@@ -73,7 +73,7 @@
                 </div>
             </div>  
             <div class="col">
-                <button class="btn btn-primary" type="submit">Register</button>
+                <button class="btn btn-primary" id="registerBtn">Register</button>
                 <!-- <button class="btn btn-primary w-25" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                     <span class="visually-hidden" role="status">Loading...</span>
@@ -85,37 +85,7 @@
         </form>
     </div>
 
-    <script>
-        document.getElementById("closeBtn").onclick = () => {
-            location.href = "index.html";
-        };
-
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (() => {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
-            const userPass = document.getElementById('userPass').value;
-            const userConfPass = document.getElementById('userConfPass').value;
-
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity() ) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    } else if (userPass != userConfPass) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        
-                    }
-
-                    setTimeout(100)
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-    </script>
+    <script src="./js/register.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 </body>
 </html>

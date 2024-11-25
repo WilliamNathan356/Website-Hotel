@@ -18,26 +18,23 @@ const generateAccessToken = (email, id) => {
 
 module.exports = {
     async register(req, res) {
-        try {
-            const payload = req.body;
-            const user = await userModel.createUser(
-                Object.assign(payload)
-            );
+        const payload = req.body;
+        const valUser = await userModel.findUser(payload.email);
+        if (valUser){
+            const response = {
+                status: 'Failed! User exists',
+            }
+            res.status(400).send(response);
+        } else {
+            const user = await userModel.createUser(payload);
             const accessToken = generateAccessToken(payload.email, user.id);
-
-            return res.status(200).json({
-                status: true,
-                data: {
-                    user: user.toJSON(),
-                    token: accessToken,
-                },
-            });
-        } catch (err) {
-            return res.status(500).json({
-                status: false,
-                error: err,
-            });
+            const response = {
+                token: accessToken,
+                redirectTo: '/'
+            }
+            res.status(200).send(response);
         }
+        
     },
     async login(req, res) {
         try {
@@ -45,7 +42,7 @@ module.exports = {
             const user = await userModel.findUser({ email });
 
             if (!user || !user.password) {
-                return res.status(400).json({
+                res.status(400).json({
                     status: false,
                     error: {
                         message: "Email/Password is incorrect!"
@@ -55,15 +52,16 @@ module.exports = {
 
             const accessToken = generateAccessToken(user.email, user.id);
 
-            return res.status(200).json({
+            res.status(200).json({
                 status: true,
                 data: {
                     user: user.toJSON(),
                     token: accessToken,
+                    redirectUrl: '../index.html',
                 }
             });
         } catch (err) {
-            return res.status(500).json({
+            res.status(500).json({
                 status: false,
                 error: err,
             });

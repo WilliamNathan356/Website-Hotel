@@ -11,7 +11,6 @@ const userModel = {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
     },
     password: {
         type: DataTypes.STRING,
@@ -33,27 +32,27 @@ const userModel = {
 };
 
 module.exports = {
-    initialise: (sequelize) => {
+    initialise(sequelize) {
         this.model = sequelize.define("user", userModel);
     },
 
     async createUser(user) {
         try {
-            return await this.model.create(user);
+            return await this.model.create({
+                email: user.email,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName
+            });
         } catch (error) {
             console.error('Error creating user:', error);
             throw error;
         }
     },
 
-    async findUser(query) {
-        try {
-            return await this.model.findOne({
-                where: query,
-            });
-        } catch (error) {
-            console.error('Error finding user:', error);
-            throw error;
-        }
+    async findUser(email) {
+        return await this.model.findOne({where: {
+            email: email
+        }});
     }
 };
