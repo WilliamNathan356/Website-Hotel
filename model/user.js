@@ -3,7 +3,7 @@ const { DataTypes} = require("sequelize");
 const { ROLES } = require("../config")
 
 const userModel = {
-    id: {
+    userID: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
@@ -34,6 +34,7 @@ const userModel = {
 module.exports = {
     initialise(sequelize) {
         this.model = sequelize.define("user", userModel);
+        return this.model
     },
 
     async createUser(user) {
@@ -51,8 +52,20 @@ module.exports = {
     },
 
     async findUser(email) {
-        return await this.model.findOne({where: {
+        return await this.model.findOne({
+            where: {
             email: email
         }});
+    },
+
+    async findBooking(bookingModel){
+        try {
+            return this.model.findAll({ 
+                include: bookingModel
+            });
+        } catch (error) {
+            console.error('Error finding associated booking to this user: ', error);
+            throw error;
+        }
     }
 };

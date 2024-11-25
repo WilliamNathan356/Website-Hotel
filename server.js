@@ -8,6 +8,7 @@ const Sequelize = require('sequelize')
 // Import Model
 const userModel = require('./model/user');
 const roomModel = require('./model/room');
+const bookingModel = require('./model/booking');
 
 // Import Configuration
 const { PORT } = require('./config');
@@ -30,8 +31,9 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
   });
   
 // Initialising the Model on sequelize
-userModel.initialise(sequelize);
-roomModel.initialise(sequelize);
+const user = userModel.initialise(sequelize);
+const room = roomModel.initialise(sequelize);
+const booking = bookingModel.initialise(sequelize);
 
 // Syncing the models that are defined on sequelize with the tables that alredy exists
 // in the database. It creates models as tables that do not exist in the DB.
@@ -39,6 +41,24 @@ sequelize
     .sync({ force: true })
     .then(() => {
         console.log("Sequelize Initialised!!");
+
+        // Attach Foreign Key to Tables
+        user.hasMany(booking, {
+            sourceKey: 'userID',
+            foreignKey: 'userID',
+        });
+        booking.belongsTo(user, {
+            targetKey: 'userID',
+            foreignKey: 'userID'
+        });
+        room.hasMany(booking, {
+            sourceKey: 'roomID',
+            foreignKey: 'roomID',
+        });
+        booking.belongsTo(room, {
+            targetKey: 'roomID',
+            foreignKey: 'roomID'
+        });
 
         // Attaching the Authentication and User Routes to the app.
         app.use(express.static('public'))
@@ -59,8 +79,3 @@ sequelize
     .catch((err) => {
         console.error("Sequelize Initialisation threw an error:", err);
     });
-
-// COMMENTED TO TEST FUNCTIONALITY 11/10/2024
-// app.post("/register", (req, res));
-// app.post("/login", (req, res));
-// app.get("/user" (req, res));

@@ -23,6 +23,7 @@ const roomModel = {
 module.exports = {
     initialise: (sequelize) => {
         this.model = sequelize.define("room", roomModel);
+        return this.model;
     },
     async createRoom(room) {
         try {
