@@ -2,10 +2,9 @@ document.getElementById("closeBtn").onclick = () => {
     location.href = "index.html";
 };
 
-// const forms = document.querySelectorAll('.needs-validation');
-
 document.getElementById('registerBtn').addEventListener('click', (e) => {
     e.preventDefault();
+    const forms = document.getElementById('registerForm');
     const userEmail = document.getElementById('userEmail').value;
     const userFName = document.getElementById('userFName').value;
     const userLName = document.getElementById('userLName').value;
@@ -25,12 +24,16 @@ document.getElementById('registerBtn').addEventListener('click', (e) => {
         lastName: userLName,
     };
 
+    const resBtn = document.getElementById('registerBtn');
+    resBtn.innerHTML = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span class="visually-hidden" role="status">Loading...</span>';
+    resBtn.setAttribute('disabled', '')
+
     axios.post(url, formData)
     .then((res) => {
-        window.location.href(res.data.redirectTo);
+        setTimeout(3000);
+        forms.reset();
+        window.location.href = res.data.redirectTo;
     });
-        
-        
 })
     
     // console.log('Response Data:', response);
