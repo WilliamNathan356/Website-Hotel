@@ -51,7 +51,7 @@
             $dropdown.off("mouseenter mouseleave");
         }
     });
-    
+
     
     // Back to top button
     $(window).scroll(function () {
@@ -74,8 +74,49 @@
     });
 
 
-    // Modal Video
+    // Search Button Function
+    $('#searchBtn').on('click', function() {
+        const roomLocation = $('#roomLocationSelect').val();
+        const guestNums = $('#guestNumSelect').val();
+        const checkInDate = $('#checkInDate input').val();
+        const checkOutDate = $('#checkOutDate input').val();
+    
+        const url = '/api/findRooms';
+        const formData = {
+            date: checkInDate,  
+            guestNum: parseInt(guestNums),
+            location: roomLocation
+        };   
+    
+        axios.post(url, formData)
+        .then((res) => {
+            const roomAvail = res.data.rooms.length;
+            sessionStorage.setItem('rooms', roomAvail);
+            for (let i = 0; i < roomAvail; i++) {
+                sessionStorage.setItem(`room_${i}`, res.data.rooms[i].roomName);
+                sessionStorage.setItem(`room_${i}_location`, res.data.rooms[i].location);
+                sessionStorage.setItem(`room_${i}_desc`, res.data.rooms[i].desc);
+                sessionStorage.setItem(`room_${i}_bed`, (res.data.rooms[i].guestNumMax/2));
+            }
+        })
+        .then(() => {
+            window.location.href = "/room.html";
+        });
+    });
+
+    
+    // Modal Video and On Document Load Functionalities
     $(document).ready(function () {
+        // Get User (If any,)
+        if (sessionStorage.getItem('userToken') && sessionStorage.getItem('user')) {
+            var profileLink = $('#profileLink');
+            var loginLink = $('#loginLink');
+            profileLink.removeAttr('hidden').html('Welcome, ' + sessionStorage.getItem('user'));
+            loginLink.attr('hidden', '');
+        } else {
+            localStorage.clear();
+        }
+
         var $videoSrc;
         $('.btn-play').click(function () {
             $videoSrc = $(this).data("src");
