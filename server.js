@@ -38,8 +38,8 @@ const booking = bookingModel.initialise(sequelize);
 // Syncing the models that are defined on sequelize with the tables that alredy exists
 // in the database. It creates models as tables that do not exist in the DB.
 sequelize
-    .sync({ force: true })
-    .then(() => {
+    .sync({ force: config.force })
+    .then(async () => {
         console.log("Sequelize Initialised!!");
 
         // Attach Foreign Key to Tables
@@ -59,6 +59,19 @@ sequelize
             targetKey: 'roomID',
             foreignKey: 'roomID'
         });
+
+        const rooms = JSON.parse(JSON.stringify(await room.findAll()));
+        if (Object.keys(rooms).length == 0){
+            room.bulkCreate(config.rooms);
+            room.update(
+                { nextAvailableDate: new Date() },
+                {
+                    where: {
+                        nextAvailableDate: 'Invalid Date'
+                    }
+                }
+            )
+        }
 
         // Attaching the Authentication and User Routes to the app.
         app.use(express.static('public'))
