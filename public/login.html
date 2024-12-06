@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">  
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -25,6 +28,7 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container position-absolute top-50 start-50 translate-middle bg-dark w-50">
         <div class="row mt-3 bg-primary pt-2">
@@ -32,10 +36,10 @@
                 <button type="button" class="btn-close btn-close-white mt-2" aria-label="Close" id="closeBtn"></button>
             </div>
             <div class="col-11 ps-0">
-                <h1 class="text-light">Welcome to TaiwanIn</h1>   
+                <h1 class="text-light">Welcome to TaiwanIn</h1>
             </div>
         </div>
-        
+
         <form class="row g-4 m-4 mt-0 p-4 pt-1 needs-validation text-light" id="loginForm" novalidate>
             <div id="liveAlertPlaceholder"></div>
             <div class="col-md-12">
@@ -44,14 +48,14 @@
                 <div class="valid-feedback">
                     Looks good!
                 </div>
-            </div>  
+            </div>
             <div class="col-12">
                 <label for="userPass" class="form-label">Password</label>
                 <input type="password" class="form-control" id="userPass" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
-            </div>  
+            </div>
             <div class="col">
                 <button class="btn btn-primary" type="submit" id="loginBtn">Login</button>
             </div>
@@ -64,4 +68,5 @@
     <script src="./js/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 </body>
+
 </html>
