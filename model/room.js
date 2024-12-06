@@ -29,6 +29,10 @@ const roomModel = {
     nextAvailableDate: {
         type: DataTypes.DATEONLY,
         allowNull: true,
+    },
+    desc: {
+        type: DataTypes.STRING,
+        allowNull: true,
     }
 
 };
@@ -40,16 +44,29 @@ module.exports = {
     },
 
     async findRooms(uDate, uGuestNum, uLocation) {
-        return await this.model.findAll({
-            where: {
-                [Op.and]: [
-                    Sequelize.where(Sequelize.fn('date', Sequelize.col('nextAvailableDate')), '<=', uDate),
-                ],
-                available: true ,
-                guestNumMin: { [Op.lte]: uGuestNum},
-                guestNumMax: { [Op.gte]: uGuestNum}, 
-                location: { [Op.startsWith]: uLocation } 
-            },
-        });
+        if (uLocation == 'Any'){
+            return await this.model.findAll({
+                where: {
+                    [Op.and]: [
+                        Sequelize.where(Sequelize.fn('date', Sequelize.col('nextAvailableDate')), '<=', uDate),
+                    ],
+                    available: true ,
+                    guestNumMin: { [Op.lte]: uGuestNum},
+                    guestNumMax: { [Op.gte]: uGuestNum}
+                },
+            });
+        } else {
+            return await this.model.findAll({
+                where: {
+                    [Op.and]: [
+                        Sequelize.where(Sequelize.fn('date', Sequelize.col('nextAvailableDate')), '<=', uDate),
+                    ],
+                    available: true ,
+                    guestNumMin: { [Op.lte]: uGuestNum},
+                    guestNumMax: { [Op.gte]: uGuestNum}, 
+                    location: { [Op.startsWith]: uLocation } 
+                },
+            });
+        }
     },
 };
