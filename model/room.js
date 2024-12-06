@@ -1,5 +1,5 @@
 // Modules/Library Import
-const { DataTypes } = require("sequelize");
+const { DataTypes, Op, Sequelize } = require("sequelize");
 
 const roomModel = {
     roomID: {
@@ -14,34 +14,42 @@ const roomModel = {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    roomSize: {
-        type: DataTypes.STRING,
+    guestNumMin: {
+        type: DataTypes.INTEGER,
         allowNull: false,
-    }   
+    },
+    guestNumMax: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    available: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+    },
+    nextAvailableDate: {
+        type: DataTypes.DATEONLY,
+        allowNull: true,
+    }
+
 };
 
 module.exports = {
-    initialise: (sequelize) => {
+    initialise(sequelize) {
         this.model = sequelize.define("room", roomModel);
-        return this.model;
-    },
-    async createRoom(room) {
-        try {
-            return await this.model.create(room);
-        } catch (error) {
-            console.error('Error creating room:', error);
-            throw error;
-        }
+        return this.model
     },
 
-    async findRoom(query) {
-        try {
-            return await this.model.findOne({
-                where: query,
-            });
-        } catch (error) {
-            console.error('Error finding room:', error);
-            throw error;
-        }
+    async findRooms(uDate, uGuestNum, uLocation) {
+        return await this.model.findAll({
+            where: {
+                [Op.and]: [
+                    Sequelize.where(Sequelize.fn('date', Sequelize.col('nextAvailableDate')), '<=', uDate),
+                ],
+                available: true ,
+                guestNumMin: { [Op.lte]: uGuestNum},
+                guestNumMax: { [Op.gte]: uGuestNum}, 
+                location: { [Op.startsWith]: uLocation } 
+            },
+        });
     },
 };
