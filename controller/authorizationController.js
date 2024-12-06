@@ -31,7 +31,7 @@ module.exports = {
                 const accessToken = generateAccessToken(payload.email, user.id);
                 const response = {
                     token: accessToken,
-                    redirectTo: '/'
+                    redirectUrl: '/'
                 }
                 res.status(200).send(response);
             }
@@ -62,13 +62,14 @@ module.exports = {
                     token: accessToken,
                     redirectUrl: '/',   
                 }
-                res.status(200).send(response);
+                res.send(response);
             }
         } catch (err) {
-            res.status(500).json({
-                status: false,
+            const response = {
+                status: 500,
                 error: err,
-            });
+            }
+            res.send(response);
         }
     }
 
