@@ -13,30 +13,28 @@ document.getElementById('registerBtn').addEventListener('click', (e) => {
 
     // Validate passwords
     if (!userPass || userPass !== userConfPass) {
-        alert('Passwords do not match. Please try again.');
-    }
-
-    const url = '/api/register';
-    const formData = {
-        email: userEmail,
-        password: userPass,
-        firstName: userFName,
-        lastName: userLName,
-    };
-
-    const resBtn = document.getElementById('registerBtn');
-    resBtn.innerHTML = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span class="visually-hidden" role="status">Loading...</span>';
-    resBtn.setAttribute('disabled', '')
-
-    axios.post(url, formData)
-    .then((res) => {
-        setTimeout(3000);
-        localStorage.setItem("userToken", res.data.token);
-        localStorage.setItem("user", userEmail);
-    })
-    .then((data) => {
         forms.reset();
-        window.location.href = data.redirectTo;
-    })
+        alert('Passwords do not match. Please try again.');
+    } else {
+        const url = '/api/register';
+        const formData = {
+            email: userEmail,
+            password: userPass,
+            firstName: userFName,
+            lastName: userLName,
+        };
+
+        const resBtn = document.getElementById('registerBtn');
+        resBtn.innerHTML = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span class="visually-hidden" role="status">Loading...</span>';
+        resBtn.setAttribute('disabled', '')
+
+        axios.post(url, formData)
+        .then((res) => {
+            sessionStorage.setItem("userToken", res.data.token);
+            sessionStorage.setItem("user", userEmail);
+            forms.reset();
+            window.location.href = res.data.redirectUrl;
+        })
+    }
 });
 

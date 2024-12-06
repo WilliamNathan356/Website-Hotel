@@ -11,7 +11,16 @@
     };
     spinner();
     
-    
+    // Get Date Only
+    $(function () {
+        $('#checkInDate').datetimepicker({
+            format: 'L'
+        });
+        $('#checkOutDate').datetimepicker({
+            format: 'L'
+        });
+    });
+
     // Initiate the wowjs
     new WOW().init();
     
@@ -71,7 +80,7 @@
         $('.btn-play').click(function () {
             $videoSrc = $(this).data("src");
         });
-        console.log($videoSrc);
+        // console.log($videoSrc);
 
         $('#videoModal').on('shown.bs.modal', function (e) {
             $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
