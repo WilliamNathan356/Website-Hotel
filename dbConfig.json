@@ -2,11 +2,307 @@
     "development": {
         "username": "t_dev",
         "password": "t_dev",
-        "database": "t_db_dev"
+        "database": "t_db_dev",
+        "force": true,
+        "rooms": [
+            {
+                "roomName": "Yuhao Hotel - Hsinchu Branch",
+                "location": "Hsinchu_1",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Lakeshore Hotel Hsinchu",
+                "location": "Hsinchu_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Darlon Hotel, Hsinchu",
+                "location": "Hsinchu_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Kindness Hotel Hualien",
+                "location": "Hualien_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "HiYesHotel勤天商旅-花蓮館",
+                "location": "Hualien_2",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Classic City Resort, Hualien",
+                "location": "Hualien_3",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Guide Hotel Kaohsiung Liuhe",
+                "location": "Kaohsiung_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Hotel Sunshine, Kaohsiung",
+                "location": "Kaohsiung_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Hotel Midtown Richardson - Kaohsiung Bo'ai",
+                "location": "Kaohsiung_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Golden Pacific Hotel, Taichung",
+                "location": "Taichung_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "BlueSky Hotel, Taichung",
+                "location": "Taichung_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Explore Hotel, Taichung",
+                "location": "Taichung_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "路境行旅 台南西門館 Finders Hotel Tainan Ximen",
+                "location": "Tainan_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "HOTEL COZZI Tainan Ximen",
+                "location": "Tainan_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "XIUXI Anping Hotel, Tainan",
+                "location": "Tainan_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Episode Daan Taipei, JdV by Hyatt Hotel",
+                "location": "Taipei_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Meworld Hotel - Taipei Main Station",
+                "location": "Taipei_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "ILLUME Taipei",
+                "location": "Taipei_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            }
+        ]  
     },
     "production": {
         "username": "t_prod",
         "password": "t_prod",
-        "database": "taiwanin_db"
-    }    
+        "database": "taiwanin_db",
+        "force": false,
+        "rooms": [
+            {
+                "roomName": "Yuhao Hotel - Hsinchu Branch",
+                "location": "Hsinchu_1",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Lakeshore Hotel Hsinchu",
+                "location": "Hsinchu_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Darlon Hotel, Hsinchu",
+                "location": "Hsinchu_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Kindness Hotel Hualien",
+                "location": "Hualien_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "HiYesHotel勤天商旅-花蓮館",
+                "location": "Hualien_2",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Classic City Resort, Hualien",
+                "location": "Hualien_3",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Guide Hotel Kaohsiung Liuhe",
+                "location": "Kaohsiung_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Hotel Sunshine, Kaohsiung",
+                "location": "Kaohsiung_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Hotel Midtown Richardson - Kaohsiung Bo'ai",
+                "location": "Kaohsiung_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Golden Pacific Hotel, Taichung",
+                "location": "Taichung_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "BlueSky Hotel, Taichung",
+                "location": "Taichung_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Explore Hotel, Taichung",
+                "location": "Taichung_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "路境行旅 台南西門館 Finders Hotel Tainan Ximen",
+                "location": "Tainan_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "HOTEL COZZI Tainan Ximen",
+                "location": "Tainan_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "XIUXI Anping Hotel, Tainan",
+                "location": "Tainan_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Episode Daan Taipei, JdV by Hyatt Hotel",
+                "location": "Taipei_1",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "Meworld Hotel - Taipei Main Station",
+                "location": "Taipei_2",
+                "guestNumMin": 1,
+                "guestNumMax": 4,
+                "available": true,
+                "nextAvailableDate": ""
+            },
+            {
+                "roomName": "ILLUME Taipei",
+                "location": "Taipei_3",
+                "guestNumMin": 1,
+                "guestNumMax": 2,
+                "available": true,
+                "nextAvailableDate": ""
+            }
+        ]  
+    }
+    
+
 }
