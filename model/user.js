@@ -54,7 +54,7 @@ module.exports = {
     async findUser(email) {
         return await this.model.findOne({
             where: {
-            email: email
+                email: email
         }});
     },
 
