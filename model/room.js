@@ -43,6 +43,14 @@ module.exports = {
         return this.model
     },
 
+    async findRoom(uName){
+        return await this.model.findOne({
+            where: {
+                roomName: uName
+            }
+        })
+    },
+
     async findRooms(uDate, uGuestNum, uLocation) {
         if (uLocation == 'Any'){
             return await this.model.findAll({
@@ -69,4 +77,19 @@ module.exports = {
             });
         }
     },
+
+    
+    async updateRoom(checkOutDate, roomId){
+        return this.model.update(
+            { 
+                available: false,
+                nextAvailableDate: checkOutDate   
+            },
+            {
+                where: {
+                    roomID: roomId
+                }
+            }
+        )
+    }
 };
