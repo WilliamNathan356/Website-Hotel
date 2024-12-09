@@ -44,10 +44,12 @@ module.exports = {
     },
     async login(req, res) {
         try {
-            const { email, password } = req.body;
-            const user = await userModel.findUser({ email });
+            const payload = req.body;
+            const uEmail = payload.email;
+            const uPass = payload.password
+            const user = await userModel.findUser(uEmail);
 
-            if (!user || !user.password || password != user.password) {
+            if (!user || !user.password || uPass != user.password) {
                 const response = {
                     status: false,
                     error: {
