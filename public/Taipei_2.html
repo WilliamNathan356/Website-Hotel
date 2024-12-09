@@ -45,6 +45,7 @@
         </div>
 
 
+        <!-- Header Start -->
         <div class="container-fluid bg-dark px-0">
             <div class="row gx-0">
                 <div class="col-lg-3 bg-dark d-none d-lg-block">
@@ -91,12 +92,15 @@
                                     </div>
                                 </div>
                                 <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                <a href="login.html" class="nav-item nav-link" id="loginLink">Login/Register</a>
                             </div>
+                            <a class="nav-link" id="profileLink"></a>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
+        <!-- Header End -->
 
 
         <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-2.jpg);">
@@ -115,7 +119,7 @@
         </div>
 
 
-        <div class="container-xxl py-5">
+        <div class="container-xxl booking py-5">
             <div class="container">
                 <div class="row g-5">
 
@@ -180,7 +184,7 @@
                             </button>
                         </div>
                         <div class="d-flex align-items-center mb-4">
-                            <h1 class="mb-0">Episode Daan Taipei, JdV by Hyatt Hotel</h1>
+                            <h1 class="mb-0" id="roomName" >Episode Daan Taipei, JdV by Hyatt Hotel</h1>
                             <div class="ps-3">
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
@@ -448,38 +452,37 @@
                             </div>
                             <div class="row g-3 p-4 pt-2">
                                 <div class="col-12">
-                                    <div class="date" id="date3" data-target-input="nearest">
+                                    <div class="date" id="checkInDate" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input"
-                                            placeholder="Check in" data-target="#date3" data-toggle="datetimepicker">
+                                            placeholder="Check in" data-target="#checkInDate" data-toggle="datetimepicker">
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="date" id="date4" data-target-input="nearest">
+                                    <div class="date" id="checkOutDate" data-target-input="nearest">
                                         <input type="text" class="form-control datetimepicker-input"
-                                            placeholder="Check out" data-target="#date4" data-toggle="datetimepicker">
+                                            placeholder="Check out" data-target="#checkOutDate" data-toggle="datetimepicker">
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <select class="form-select">
+                                    <select class="form-select" id="adultSelector">
                                         <option selected="">Adult</option>
-                                        <option value="1">Adult 1</option>
-                                        <option value="2">Adult 2</option>
-                                        <option value="3">Adult 3</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <select class="form-select">
+                                    <select class="form-select" id="childSelector">
                                         <option selected="">Child</option>
-                                        <option value="1">Child 1</option>
-                                        <option value="2">Child 2</option>
-                                        <option value="3">Child 3</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary py-3 w-100">Book Now</button>
+                                    <button class="btn btn-primary py-3 w-100" id="bookBtn">Book Now</button>
                                 </div>
                             </div>
-                        </div>
 
 
                         <div class="border p-1 wow fadeInUp" data-wow-delay="0.1s"
@@ -520,7 +523,7 @@
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <h5 class="mb-0">Meworld Hotel - Taipei Main Station</h5>
+                                    <h5 class="mb-0" id="roomName">Meworld Hotel - Taipei Main Station</h5>
                                     <div class="ps-2">
                                         <small class="fa fa-star text-primary"></small>
                                         <small class="fa fa-star text-primary"></small>
@@ -541,9 +544,9 @@
                                     Hotel - Taipei Main Station is located 1 km from Presidential Office Building, less
                                     than
                                     1 km from Taipei Zhongshan Hall and a 13-minute walk from MRT Ximen Station.</p>
-                                <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
+                               <div class="d-flex justify-content-between">
+    <a class="btn btn-sm btn-primary rounded py-2 px-4 viewDetailBtn"  href="">View Detail</a>
+                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 bookNowBtn"  href="">Book Now</a>
                                 </div>
                             </div>
                         </div>
@@ -558,7 +561,7 @@
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <h5 class="mb-0">Episode Daan Taipei, JdV by Hyatt Hotel</h5>
+                                    <h5 class="mb-0" id="roomName">Episode Daan Taipei, JdV by Hyatt Hotel</h5>
                                     <div class="ps-2">
                                         <small class="fa fa-star text-primary"></small>
                                         <small class="fa fa-star text-primary"></small>
@@ -578,10 +581,10 @@
                                     is
                                     only a 3-minute walk from shopping area or Zhongxiao Fuxing MRT Station. Guests can
                                     enjoy the on-site restaurant. It offers a terrace and views of the city.</p>
-                                <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="Taipei_2.html">View
+                               <div class="d-flex justify-content-between">
+    <a class="btn btn-sm btn-primary rounded py-2 px-4 viewDetailBtn"  href="Taipei_2.html">View
                                         Detail</a>
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="Taipei_2.html">Book Now</a>
+                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 bookNowBtn"  href="Taipei_2.html">Book Now</a>
                                 </div>
                             </div>
                         </div>
@@ -596,7 +599,7 @@
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <h5 class="mb-0">ILLUME Taipei</h5>
+                                    <h5 class="mb-0" id="roomName">ILLUME Taipei</h5>
                                     <div class="ps-2">
                                         <small class="fa fa-star text-primary"></small>
                                         <small class="fa fa-star text-primary"></small>
@@ -619,10 +622,10 @@
                                     ILLUME TAlPEI is conveniently connected to the major transportation stations and
                                     landmarks in Taipei. MRT Nanjing Fuxing Station and Taipei Arena are both within a
                                     walking distance of the property.</p>
-                                <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="Taipei_3.html">View
+                               <div class="d-flex justify-content-between">
+    <a class="btn btn-sm btn-primary rounded py-2 px-4 viewDetailBtn"  href="Taipei_3.html">View
                                         Detail</a>
-                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="Taipei_3.html">Book Now</a>
+                                    <a class="btn btn-sm btn-dark rounded py-2 px-4 bookNowBtn"  href="Taipei_3.html">Book Now</a>
                                 </div>
                             </div>
                         </div>
@@ -674,21 +677,22 @@
         </div>
 
 
-        <script src="hotel-html-template/jquery-3.4.1.min.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/bootstrap.bundle.min.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/wow.min.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/rating.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/easing.min.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/waypoints.min.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/counterup.min.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/owl.carousel.min.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/moment.min.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/moment-timezone.min.js.download" type="text/javascript"></script>
-        <script src="hotel-html-template/tempusdominus-bootstrap-4.min.js.download" type="text/javascript"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-
-        <script src="hotel-html-template/main(1).js.download" type="text/javascript"></script>
-
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/counterup/counterup.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="lib/tempusdominus/js/moment.min.js"></script>
+        <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+       
+ 
+        <!-- Not So Template Javascript -->
+        <script src="js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 </body>
 
 </html>
