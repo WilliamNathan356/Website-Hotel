@@ -73,38 +73,6 @@
         time: 2000
     });
 
-
-    // Search Button Function
-    $('#searchBtn').on('click', function() {
-        const roomLocation = $('#roomLocationSelect').val();
-        const guestNums = $('#guestNumSelect').val();
-        const checkInDate = $('#checkInDate input').val();
-        const checkOutDate = $('#checkOutDate input').val();
-    
-        const url = '/api/findRooms';
-        const formData = {
-            date: checkInDate,  
-            guestNum: parseInt(guestNums),
-            location: roomLocation
-        };   
-    
-        axios.post(url, formData)
-        .then((res) => {
-            const roomAvail = res.data.rooms.length;
-            sessionStorage.setItem('rooms', roomAvail);
-            for (let i = 0; i < roomAvail; i++) {
-                sessionStorage.setItem(`room_${i}`, res.data.rooms[i].roomName);
-                sessionStorage.setItem(`room_${i}_location`, res.data.rooms[i].location);
-                sessionStorage.setItem(`room_${i}_desc`, res.data.rooms[i].desc);
-                sessionStorage.setItem(`room_${i}_bed`, (res.data.rooms[i].guestNumMax/2));
-            }
-        })
-        .then(() => {
-            window.location.href = "/room.html";
-        });
-    });
-
-    
     // Modal Video and On Document Load Functionalities
     $(document).ready(function () {
         // Get User (If any,)
@@ -116,6 +84,101 @@
         } else {
             localStorage.clear();
         }
+
+        // View Details Button Function
+        $('.viewDetailBtn').on('click', function() {
+            const roomName = $(this).closest('.room-item').find('#roomName').text();
+
+            const url = '/api/findRoom';
+            const formData = {
+                uName: roomName
+            };
+
+            axios.post(url, formData)
+            .then((res) => {
+                sessionStorage.setItem('currentRoom', res.data.roomName);
+            })
+        })
+
+        // Book Now Button Function
+        $('.bookNowBtn').on('click', function() {
+            const roomName = $(this).closest('.room-item').find('#roomName').text();
+
+            const url = '/api/findRoom';
+            const formData = {
+                uName: roomName
+            };
+
+            axios.post(url, formData)
+            .then((res) => {
+                sessionStorage.setItem('currentRoom', res.data.roomName);
+            })
+        })
+
+        // Search Button Function
+        $('#searchBtn').on('click', function() {
+            const roomLocation = $('#roomLocationSelect').val();
+            const guestNums = $('#guestNumSelect').val();
+            const checkInDate = $('#checkInDate input').val();
+            const checkOutDate = $('#checkOutDate input').val();
+        
+            const url = '/api/findRooms';
+            const formData = {
+                date: checkInDate,  
+                guestNum: parseInt(guestNums),
+                location: roomLocation
+            };   
+        
+            axios.post(url, formData)
+            .then((res) => {
+                const roomAvail = res.data.rooms.length;
+                sessionStorage.setItem('rooms', roomAvail);
+                for (let i = 0; i < roomAvail; i++) {
+                    sessionStorage.setItem(`room_${i}`, res.data.rooms[i].roomName);
+                    sessionStorage.setItem(`room_${i}_location`, res.data.rooms[i].location);
+                    sessionStorage.setItem(`room_${i}_desc`, res.data.rooms[i].desc);
+                    sessionStorage.setItem(`room_${i}_bed`, (res.data.rooms[i].guestNumMax/2));
+                }
+            })
+            .then(() => {
+                window.location.href = "/room.html";
+            });
+        });
+
+        // Book Button Function
+        $('#bookBtn').on('click', function(e) {
+            e.preventDefault();
+            
+            const uEmail = sessionStorage.getItem('user');
+            const uLocation = sessionStorage.getItem('currentRoom');
+            const checkInDate = $('#checkInDate input').val();
+            const checkOutDate = $('#checkOutDate input').val();
+            const adultNum = $('#adultSelector').val();
+            const childNum = $('#childSelector').val();
+        
+            const url = '/api/book';
+            const formData = {
+                email: uEmail,
+                location: uLocation,
+                adultNum: adultNum,
+                childNum: childNum,
+                checkInDate: checkInDate,
+                checkOutDate: checkOutDate
+            };
+        
+            axios.post(url, formData)
+            .then((res) => {
+                if (res.data.status == 'Success!'){
+                    window.location.href = '/';
+                } else {
+                    console.error(res.data)
+                    alert(res.data);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
 
         var $videoSrc;
         $('.btn-play').click(function () {
