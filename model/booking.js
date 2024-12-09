@@ -1,10 +1,28 @@
 const { DataTypes } = require("sequelize");
+const roomModel = require('../model/room');
+const userModel = require('../model/user');
 
 const bookingModel = {
     bookingID: {
         type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false,
+    },
+    userID: {
+        allowNull: true,
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'users',
+          key: 'userID'
+        }
+    },
+    roomID: {
+        allowNull: true,
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'rooms',
+          key: 'roomID'
+        }
     },
     checkInDate: {
         type: DataTypes.DATEONLY,
@@ -24,28 +42,18 @@ module.exports = {
 
     async createBooking(data){
         try {
-            return await this.model.create({
+            const done = await this.model.create({
                 bookingID: data.bookingID,
                 userID: data.userID,
                 roomID: data.roomID,
-                checkInDate: data.checkIn,
-                checkOutDate: data.checkOut,
+                checkInDate: data.checkInDate,
+                checkOutDate: data.checkOutDate,
             });
-        } catch (error) {
-            console.error('Error craeting booking: ', error);
-            throw error;
-        }
-        
-    },
 
-    async findBooking(query){
-        try {
-            return await this.model.findOne({
-                where: query,
-            });
+            return done;
         } catch (error) {
-            console.erorr('Error finding booking: ', err);
+            console.error('Error creating booking: ', error);
             throw error;
-        }
+        }  
     },
 }
