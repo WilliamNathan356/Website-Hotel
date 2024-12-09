@@ -1,6 +1,7 @@
 // Modules/Library Import
 const { DataTypes} = require("sequelize");
-const { ROLES } = require("../config")
+const { ROLES } = require("../config");
+const bookingModel = require('../model/booking');
 
 const userModel = {
     userID: {
@@ -51,16 +52,19 @@ module.exports = {
         }
     },
 
-    async findUser(email) {
+    async findUser(uEmail) {
         return await this.model.findOne({
             where: {
-                email: email
+                email: uEmail
         }});
     },
 
-    async findBooking(bookingModel){
+    async findBooking(email){
         try {
-            return this.model.findAll({ 
+            return this.model.findAll({
+                where: {
+                    email: email 
+                }, 
                 include: bookingModel
             });
         } catch (error) {
