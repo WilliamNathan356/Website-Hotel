@@ -169,10 +169,32 @@
             axios.post(url, formData)
             .then((res) => {
                 if (res.data.status == 'Success!'){
+                    var transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                          user: 'taiwanin.info@gmail.com',
+                          pass: 'yourmumgay356'
+                        }
+                    });
+                      
+                    var mailOptions = {
+                        from: 'taiwanin.info@gmail.com',
+                        to: `${uEmail}`,
+                        subject: 'Booking Confirmed!',
+                        text: ''
+                    };
+                      
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log('Email sent: ' + info.response);
+                        }
+                    });
                     window.location.href = '/';
                 } else {
                     console.error(res.data)
-                    alert(res.data);
+                    alert(`${res.data.status} ${res.data.next}`);
                 }
             })
             .catch((error) => {
