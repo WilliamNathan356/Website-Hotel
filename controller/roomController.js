@@ -30,6 +30,27 @@ module.exports = {
         }
     },
 
+    async findRoomWID(req, res){
+        try {
+            const payload = req.params;
+            const roomID = payload.roomID;
+            const room = await roomModel.findRoomWID(roomID);
+
+            const response = {
+                status: 'Fetched Room!',
+                room: room
+            }
+            res.status(200).send(response);
+
+        } catch(err) {
+            const response = {
+                status: 'Cannot Fetch Room',
+                error: err
+            };
+            res.status(500).send(response);
+        }
+    },
+
     async getRooms(req, res) {
         try {
             // Set Payload
