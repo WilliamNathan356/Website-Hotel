@@ -14,9 +14,11 @@ router.post("/login", authorizationController.login);
 // Rooms
 router.post("/findRooms", roomController.getRooms);
 router.post("/findRoom", roomController.findRoom);
+router.get("/rooms/:roomID", roomController.findRoomWID);
 
 // Room Booking
 router.post('/book', bookingController.bookRoom);
+router.get('/bookings/:email', bookingController.findBooking);
 
 // User
 router.get("/:userId", userController.getUser)
