@@ -7,7 +7,6 @@ module.exports = {
     async bookRoom(req, res) {
         try {
             const payload = req.body;
-            console.log(payload)
             const uEmail = payload.email;
             const uRoomLocation = payload.location; 
             if (uEmail && uRoomLocation){
@@ -25,8 +24,12 @@ module.exports = {
                 const user = JSON.parse(JSON.stringify(await userModel.findUser(uEmail)));
                 const room = JSON.parse(JSON.stringify(await roomModel.findRoom(uRoomLocation)));
                 
+                // Format Dates
+                const formatNextAvailable = moment(room.nextAvailableDate).format('YYYY-MM-DD');
+                const formatCheckIn = moment(checkInDate).format('YYYY-MM-DD');
+
                 // Check Room Availability
-                if (room.available == true){
+                if (room.available == true || formatNextAvailable <= formatCheckIn){
                     const userId = user.userID;
                     const roomId = room.roomID;
                     
@@ -53,7 +56,11 @@ module.exports = {
                     };
                     res.status(200).send(response);    
                 } else {
-                    alert(`The room is not available at this time! Try ${room.nextAvailableDate}`)
+                    const response = {
+                        status: 'The room is not available at this time! Try',
+                        next: room.nextAvailableDate
+                    }
+                    res.status(200).send(response); 
                 }
 
                 
@@ -70,6 +77,28 @@ module.exports = {
                 error: err
             };
             res.send(response);
+        }
+    },
+
+    async findBooking(req, res) {
+        try{
+            const payload = req.params;
+            const uEmail = payload.email;
+
+            const bookings = await userModel.findBooking(uEmail);
+
+            const response = {
+                status: 'Booking Retrieved!',
+                booking: bookings
+            }
+            res.status(200).send(response);
+            
+        } catch (err) {
+            const response = {
+                status: 'Cannot Retrieve Booking',
+                error: err
+            }
+            res.status(500).send(response);
         }
     }
 }
