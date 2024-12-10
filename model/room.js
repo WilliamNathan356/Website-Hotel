@@ -51,6 +51,14 @@ module.exports = {
         })
     },
 
+    async findRoomWID(uID){
+        return await this.model.findOne({
+            where: {
+                roomID: uID
+            }
+        })
+    },
+
     async findRooms(uDate, uGuestNum, uLocation) {
         if (uLocation == 'Any'){
             return await this.model.findAll({
