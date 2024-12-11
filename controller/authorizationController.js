@@ -51,12 +51,12 @@ module.exports = {
 
             if (!user || !user.password || uPass != user.password) {
                 const response = {
-                    status: false,
+                    status: 500,
                     error: {
                         message: "Email/Password is incorrect!"
                     }
                 }
-                res.status(400).send(response);
+                res.send(response);
             } else {
                 const accessToken = generateAccessToken(user.email, user.userID);
                 const response = {
