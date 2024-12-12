@@ -142,7 +142,7 @@
             },
             {
                 "roomName": "Episode Daan Taipei, JdV by Hyatt Hotel",
-                "location": "Taipei_1",
+                "location": "Taipei_2",
                 "guestNumMin": 1,
                 "guestNumMax": 4,
                 "available": true,
@@ -151,7 +151,7 @@
             },
             {
                 "roomName": "Meworld Hotel - Taipei Main Station",
-                "location": "Taipei_2",
+                "location": "Taipei_1",
                 "guestNumMin": 1,
                 "guestNumMax": 4,
                 "available": true,
@@ -312,7 +312,7 @@
             },
             {
                 "roomName": "Episode Daan Taipei, JdV by Hyatt Hotel",
-                "location": "Taipei_1",
+                "location": "Taipei_2",
                 "guestNumMin": 1,
                 "guestNumMax": 4,
                 "available": true,
@@ -321,7 +321,7 @@
             },
             {
                 "roomName": "Meworld Hotel - Taipei Main Station",
-                "location": "Taipei_2",
+                "location": "Taipei_1",
                 "guestNumMin": 1,
                 "guestNumMax": 4,
                 "available": true,
