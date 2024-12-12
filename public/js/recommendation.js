@@ -102,32 +102,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
                 recommendContainer.parentElement.removeAttribute('hidden'); 
             })
-
-            // for (let roomID in bestRoomIDs){
-            //     console.log(roomID)
-            //     axios.get(`/api/rooms/${roomID}`)
-            //     .then((res) => {
-            //         const rooms = res.data.room;
-            //         console.log(rooms)
-            //         const roomLocation = rooms.location;
-            //         const roomGuestMin = rooms.guestNumMin;
-            //         const roomGuestMax = rooms.guestNumMax;
-            //         const today = moment.now().format('YYYY-MM-DD');
-
-            //     })
-            // }
-            
-            // axios.get(`/api/rooms/${bestRoomID}`)
-            // .then((res) => {
-            //     const rooms = res.data.room;
-            //     console.log(rooms)
-            //     const roomLocation = rooms.location;
-            //     const roomGuestMin = rooms.guestNumMin;
-            //     const roomGuestMax = rooms.guestNumMax;
-            //     const today = moment.now().format('YYYY-MM-DD');
-
-            // })
-
         })
 
     }

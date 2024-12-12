@@ -73,6 +73,22 @@
         time: 2000
     });
 
+    // Set Off Canvas Body
+    const appendPreviousBookingBody = (i, bookId, uName, uEmail, uRoom, uLocation, checkIn, checkOut) => {
+        const wrapBody = document.createElement('tr');
+        wrapBody.innerHTML = [
+            `<th scope="row">${i}</th>`,
+            `<td>${bookId}</td>`,
+            `<td>${uName}</td>`,
+            `<td>${uEmail}</td>`,
+            `<td>${uRoom}</td>`,
+            `<td>${uLocation}</td>`,
+            `<td>${checkIn}</td>`,
+            `<td>${checkOut}</td>`,
+        ].join('');
+        return wrapBody;
+    };
+
     // Modal Video and On Document Load Functionalities
     $(document).ready(function () {
         // Get User (If any,)
@@ -84,6 +100,41 @@
         } else {
             localStorage.clear();
         }
+
+        // Previous Booking Button Function
+        $('#previousBookingHeader').on('click', function(){
+            // Get Booking Data
+            const previousBookingBody = $('.previousBookingBody');
+            const url = `/api/bookings/${sessionStorage.getItem('user')}`;
+            const table = $('#previousBookingTableBody');
+            table.empty();
+            axios.get(url)
+            .then((res) => {
+                const uName = res.data.booking[0].firstName + ' ' + res.data.booking[0].lastName;
+                const uEmail = res.data.booking[0].email;
+                for (let i = 0; i < res.data.booking[0].bookings.length; i++) {
+                    const bookID = res.data.booking[0].bookings[i].bookingID;
+                    const checkIn = res.data.booking[0].bookings[i].checkInDate;
+                    const checkOut = res.data.booking[0].bookings[i].checkOutDate;                    
+                    
+                    // Get Room Data
+                    const url = `/api/rooms/${res.data.booking[0].bookings[i].roomID}`;
+                    axios.get(url)
+                    .then((res) => {
+                        // Call appendPreviousBookingBody and append the returned element
+                        const uRoom = res.data.room.roomName;
+                        const uLocation = res.data.room.location;
+                        const uLoc = uLocation.split('_')[0];
+                        const previousBookingRow = appendPreviousBookingBody(i + 1, bookID, uName, uEmail, uRoom, uLoc, checkIn, checkOut);
+                        // console.log(res)
+                        table.append(previousBookingRow);
+                    });
+                }
+                previousBookingBody.removeAttr('hidden');
+            })
+            previousBookingBody.toggle();
+        })
+
 
         // View Details Button Function
         $('.viewDetailBtn').on('click', function() {
@@ -169,6 +220,7 @@
             axios.post(url, formData)
             .then((res) => {
                 if (res.data.status == 'Success!'){
+                    alert('Booking Success')
                     window.location.href = '/';
                 } else {
                     console.error(res.data)
