@@ -47,7 +47,7 @@ module.exports = {
                     console.log(data)
 
                     const bookedRoom = await bookingModel.createBooking(data);
-                    const apiResponse = Object.entries(bookedRoom.dataValues)
+                    const apiResponse = Object.entries(bookedRoom.dataValues);
 
                     // Update Room Availability
                     roomModel.updateRoom(checkOutDate, roomId)
